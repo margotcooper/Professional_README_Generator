@@ -5,6 +5,7 @@ const util = require("util");
 
 //in node type: npm init -y
 //in node type: npm i inquirer@8.2.4
+//in node, type: node index.js
 
 // TODO: Create an array of questions for user input
 
@@ -48,6 +49,7 @@ inquirer
         { value: "BSD", name: "BSD" },
         { value: "MIT", name: "MIT" },
         { value: "GPL", name: "GPL" },
+        { value: "Apache", name: "Apache" },
       ],
 
       //do another set of objects, name and value for each choice value 'BSD' name 'BSD license'
@@ -65,27 +67,30 @@ inquirer
   ])
 
   .then(function (answers) {
-    console.info();
+    console.log(answers);
     let badge;
     switch (answers.license) {
       case "BSD":
-        badge = "[BSD](https://en.wikipedia.org/wiki/BSD_licenses)";
-
+        badge = "[BSD](https://opensource.org/licenses/BSD-3-Clause)";
         break;
       case "MIT":
-        //DO ABOVE FOR LINK
+        badge = "[MIT](https://opensource.org/licenses/MIT)";
         break;
-
       case "GPL":
-        //DO ABOVE FOR LINK
+        badge = "[GPL](https://www.gnu.org/licenses/gpl-3.0)";
         break;
+      case "Apache":
+        badge = "[Apache](https://opensource.org/licenses/Apache-2.0)";
       default:
+        //do I put a "case" and "badge = " before the default?
         "No license specified";
     }
   });
 // TODO: Create a function to write README file
 //look at documentation fs write to file module
 function writeToFile(fileName, data) {
+  fs.writeFile();
+
   //this creates the readme file part of fs module
   // return `# ${}`
 }
