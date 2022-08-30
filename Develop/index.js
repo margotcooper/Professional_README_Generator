@@ -2,6 +2,7 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 const util = require("util");
+const generateMarkdown = require("./utils/generateMarkdown");
 
 //in node type: npm init -y
 //in node type: npm i inquirer@8.2.4
@@ -10,7 +11,7 @@ const util = require("util");
 //To install necessary dependencies, run the following command:
 // npm i
 
-const generateHTML = ({
+const generateMarkdown = ({
   title,
   description,
   installation,
@@ -21,6 +22,7 @@ const generateHTML = ({
   githubUser,
   email,
 }) =>
+  //replace HTML with MARKDOWN language below
   `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,10 +111,10 @@ inquirer
   ])
 
   .then((response) => {
-    const htmlPageContent = generateHTML(response);
+    const markdownPageContent = generateMarkdown(response);
 
-    fs.writeFile("index.html", htmlPageContent, (err) =>
-      err ? console.log(err) : console.log("Successfully created index.html!")
+    fs.writeFile("README.md", markdownPageContent, (err) =>
+      err ? console.log(err) : console.log("Successfully created README.md!")
     );
   });
 // .then(function (answers) {
@@ -120,19 +122,19 @@ inquirer
 //   let badge;
 //   switch (answers.license) {
 //     case "BSD":
-//       badge = "[BSD](https://opensource.org/licenses/BSD-3-Clause)";
+//       badge = "[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)";
 //       break;
 //     case "MIT":
-//       badge = "[MIT](https://opensource.org/licenses/MIT)";
+//       badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
 //       break;
 //     case "GPL":
-//       badge = "[GPL](https://www.gnu.org/licenses/gpl-3.0)";
+//       badge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
 //       break;
 //     case "Apache":
-//       badge = "[Apache](https://opensource.org/licenses/Apache-2.0)";
+//       badge = "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
 //     default:
 //       //do I put a "case" and "badge = " before the default?
-//       "No license specified";
+("No license specified");
 //   }
 // });
 
@@ -146,8 +148,8 @@ function writeToFile(fileName, data) {
     promptUser()
       // Use writeFile method imported from fs.promises to use promises instead of
       // a callback function
-      .then((answers) => writeFile("index.html", generateHTML(answers)))
-      .then(() => console.log("Successfully wrote to index.html"))
+      .then((answers) => writeFile("README.md", generateMarkdown(answers)))
+      .then(() => console.log("Successfully wrote to README.md"))
       .catch((err) => console.error(err));
   };
   // Function call to initialize app
